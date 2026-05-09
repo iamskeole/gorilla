@@ -220,7 +220,7 @@ class OpenAIResponsesHandler(BaseHandler):
         inference_data["inference_input_log"] = {
             "message": repr(inference_data["message"])
         }
-
+        # add seed as extra body
         kwargs = {
             "input": inference_data["message"],
             "model": self.model_name,
