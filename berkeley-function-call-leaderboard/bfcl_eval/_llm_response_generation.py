@@ -91,8 +91,7 @@ def get_args():
 
 
 def build_handler(model_name, temperature, args):
-    _args = args._get_args()
-    _kwargs = {i[0]: i[1] for i in args._get_kwargs()}
+    _kwargs = vars(args).copy()
     _kwargs.pop("temperature", None)
     config = MODEL_CONFIG_MAPPING[model_name]
     handler = config.model_handler(
