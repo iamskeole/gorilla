@@ -78,7 +78,8 @@ class OpenAIResponsesHandler(BaseHandler):
         else:
             return default_decode_execute_prompting(result, has_tool_call_tag)
 
-    @retry_with_backoff(error_type=RateLimitError)
+    # disable retries, we're running deterministic seeds so wasting time
+    # @retry_with_backoff(error_type=RateLimitError)
     def generate_with_backoff(self, **kwargs):
         start_time = time.time()
         api_response = self.client.responses.create(**kwargs)
