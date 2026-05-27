@@ -48,6 +48,9 @@ class OpenAICompletionsHandler(BaseHandler):
         if headers_env := os.getenv("OPENAI_DEFAULT_HEADERS"):
             kwargs["default_headers"] = json.loads(headers_env)
 
+        # we're running with deterministic seeds, so no point in retrying
+        # since we're getting the same output
+        kwargs["max_retries"] = 0
         return kwargs
 
     def decode_ast(self, result, language, has_tool_call_tag):
